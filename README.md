@@ -1,50 +1,106 @@
-# Welcome to your Expo app 👋
+# VelocePlan - Restaurant Discovery App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+VelocePlan is a React Native mobile application that helps users discover restaurants near their location. Built with Expo and Firebase, it provides a seamless experience for finding and exploring local dining options.
 
-## Get started
+## Features
 
-1. Install dependencies
+- 🔐 User Authentication (Email & Google Sign-in)
+- 📍 Location-based Restaurant Discovery
+- 🗺️ Interactive Maps Integration
+- ⭐ Restaurant Reviews and Ratings
+- 👤 User Profile Management
+- 💫 Custom Animations
+- 🎨 Modern UI Design
 
-   ```bash
-   npm install
-   ```
+## Tech Stack
 
-2. Start the app
+- **Frontend Framework**: React Native with Expo
+- **Authentication**: Firebase Auth
+- **Maps Integration**: Google Maps API
+- **Location Services**: Expo Location
+- **UI Components**: Custom components with React Native Elements
+- **Animations**: Lottie Animations
+- **State Management**: React Context API
+- **Navigation**: React Navigation
 
-   ```bash
-    npx expo start
-   ```
+## Installation
 
-In the output, you'll find options to open the app in a
+1. Clone the repository:
+bash
+git clone https://github.com/cakovera/veloceplan.git
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+2. Install dependencies:
+bash
+cd veloceplan
+npm install
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+3. Create a `.env` file in the root directory and add your API keys:
+env
+GOOGLE_PLACES_API_KEY=your_google_places_api_key
+FIREBASE_API_KEY=your_firebase_api_key
 
-## Get a fresh project
 
-When you're ready, run:
+4. Start the development server:
+bash
+npx expo start
 
-```bash
-npm run reset-project
-```
+## Project Structure
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+veloceplan/
+├── app/
+│ ├── src/
+│ │ ├── components/
+│ │ ├── screens/
+│ │ ├── context/
+│ │ ├── services/
+│ │ └── constants/
+│ ├── assets/
+│ └── index.tsx
+├── .env
+└── App.tsx
 
-## Learn more
 
-To learn more about developing your project with Expo, look at the following resources:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Key Components
 
-## Join the community
+- **Authentication**: Implements email and Google sign-in using Firebase
+- **Restaurant Discovery**: Uses Google Places API for restaurant data
+- **Location Services**: Integrates device location for nearby searches
+- **Profile Management**: Allows users to manage their profile and preferences
+- **Custom Animations**: Implements smooth transitions and loading states
 
-Join our community of developers creating universal apps.
+## Dependencies
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- `expo`: ~49.0.0
+- `react`: 18.2.0
+- `react-native`: 0.72.5
+- `@react-navigation/native`: ^6.1.9
+- `firebase`: ^10.5.2
+- `expo-location`: ~16.1.0
+- `lottie-react-native`: ^6.4.1
+- `expo-image-picker`: ~14.3.2
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Google Places API for restaurant data
+- Firebase for authentication services
+- Expo team for the amazing development framework
+- React Native community for continuous support
+
+## Contact
+
+Your Name - [@yourgithub](https://github.com/cakovera)
+
+Project Link: [https://github.com/cakovera/veloceplan](https://github.com/yourusername/veloceplan)
