@@ -101,6 +101,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-Your Name - [@yourgithub](https://github.com/cakovera)
+Your Name - [@cakovera](https://github.com/cakovera)
 
-Project Link: [https://github.com/cakovera/veloceplan](https://github.com/yourusername/veloceplan)
+Project Link: [https://github.com/cakovera/veloceplan]
