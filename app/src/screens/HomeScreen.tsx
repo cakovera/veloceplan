@@ -1,23 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   ScrollView,
-  Image,
+  Dimensions,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SHADOWS, SIZES } from '../constants/theme';
 import { useAuth } from '../context/AuthContext';
+import MapView, { Marker } from 'react-native-maps';
+import { getCurrentLocation } from '../services/location';
+import { Location } from '../types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+const { width } = Dimensions.get('window');
 
 type Props = {
   navigation: NativeStackNavigationProp<any>;
 };
 
-const HomeScreen = ({ navigation }: Props) => {
-  const { user, signOut } = useAuth();
+export default function HomeScreen({ navigation }: Props) {
+  const { user, signOut, username } = useAuth();
+  const [currentLocation, setCurrentLocation] = useState<Location | null>(null);
+
+  useEffect(() => {
+    loadLocation();
+  }, []);
+
+  const loadLocation = async () => {
+    try {
+      const location = await getCurrentLocation();
+      setCurrentLocation(location);
+    } catch (error) {
+      console.error('Konum alınamadı:', error);
+    }
+  };
 
   const handleLogout = async () => {
     try {
@@ -32,7 +51,7 @@ const HomeScreen = ({ navigation }: Props) => {
       <View style={styles.header}>
         <View>
           <Text style={styles.greeting}>Merhaba,</Text>
-          <Text style={styles.username}>{user?.email}</Text>
+          <Text style={styles.username}>{username || 'Kullanıcı'}</Text>
         </View>
         <TouchableOpacity onPress={handleLogout}>
           <Ionicons name="log-out-outline" size={24} color={COLORS.primary} />
@@ -45,10 +64,30 @@ const HomeScreen = ({ navigation }: Props) => {
           style={styles.featuredCard}
           onPress={() => navigation.navigate('RestaurantList')}
         >
-          <Image
-            source={{ uri: 'https://source.unsplash.com/800x400/?restaurant' }}
-            style={styles.featuredImage}
-          />
+          {currentLocation ? (
+            <MapView
+              style={styles.map}
+              initialRegion={{
+                latitude: currentLocation.latitude,
+                longitude: currentLocation.longitude,
+                latitudeDelta: 0.01,
+                longitudeDelta: 0.01,
+              }}
+            >
+              <Marker
+                coordinate={{
+                  latitude: currentLocation.latitude,
+                  longitude: currentLocation.longitude,
+                }}
+                title="Konumunuz"
+              />
+            </MapView>
+          ) : (
+            <View style={styles.loadingMap}>
+              <Ionicons name="location" size={32} color={COLORS.primary} />
+              <Text style={styles.loadingText}>Konum yükleniyor...</Text>
+            </View>
+          )}
           <View style={styles.featuredContent}>
             <Text style={styles.featuredTitle}>Yakınındaki Restoranlar</Text>
             <Text style={styles.featuredDescription}>
@@ -80,7 +119,7 @@ const HomeScreen = ({ navigation }: Props) => {
       </View>
     </ScrollView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -119,9 +158,40 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     ...SHADOWS.medium,
   },
-  featuredImage: {
+  map: {
     width: '100%',
     height: 200,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+  },
+  markerContainer: {
+    width: 40,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  marker: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: COLORS.primary,
+    borderWidth: 3,
+    borderColor: COLORS.white,
+    ...SHADOWS.medium,
+  },
+  loadingMap: {
+    width: '100%',
+    height: 200,
+    backgroundColor: COLORS.lightGray,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loadingText: {
+    marginTop: SIZES.small,
+    color: COLORS.gray,
+    fontSize: SIZES.font,
   },
   featuredContent: {
     padding: SIZES.medium,
@@ -158,5 +228,3 @@ const styles = StyleSheet.create({
     color: COLORS.black,
   },
 });
-
-export default HomeScreen;

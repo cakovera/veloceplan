@@ -2,8 +2,45 @@
   "expo": {
     "name": "VelocePlan",
     "slug": "veloceplan",
-    "scheme": "veloceplan",
-    "owner": "cgurluk",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.cgurluk.veloceplan",
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION"
+      ],
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBPiXfNvfFBWiJ-LDOaxIOd-Bgfg3AAUYQ"
+        }
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6a472fbd-708a-448b-8a18-68bab19633c9"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "com.cgurluk.veloceplan",
+      "config": {
+        "googleMapsApiKey": "AIzaSyBPiXfNvfFBWiJ-LDOaxIOd-Bgfg3AAUYQ"
+      }
+    }
   }
 }

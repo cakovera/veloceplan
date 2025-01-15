@@ -5,6 +5,7 @@ import RestaurantListScreen from '../screens/RestaurantListScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import RestaurantDetailScreen from '../screens/RestaurantDetailScreen';
 import LoginScreen from '../screens/LoginScreen';
+import EditProfileScreen from '../screens/EditProfileScreen';
 import { Restaurant } from '../types';
 import { useAuth } from '../context/AuthContext';
 
@@ -14,6 +15,7 @@ type RootStackParamList = {
   RestaurantDetail: { restaurant: Restaurant };
   Profile: undefined;
   Login: undefined;
+  EditProfile: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -35,6 +37,11 @@ export const AppNavigator = () => {
           <Stack.Screen name="RestaurantList" component={RestaurantListScreen} />
           <Stack.Screen name="RestaurantDetail" component={RestaurantDetailScreen} />
           <Stack.Screen name="Profile" component={ProfileScreen} />
+          <Stack.Screen 
+            name="EditProfile" 
+            component={EditProfileScreen}
+            options={{ title: 'Profili Düzenle' }}
+          />
         </>
       )}
     </Stack.Navigator>

@@ -15,7 +15,10 @@ const getCuisineType = (place: any) => {
     'turkish', 'türk', 'lahmacun', 'köfte', 'kofte',
     'lokanta', 'ocakbaşı', 'ocakbasi', 'mangal', 'iskender',
     'adana', 'urfa', 'sultan', 'efendi', 'osmanli',
-    'anadolu', 'borek', 'börek', 'king'
+    'anadolu', 'borek', 'börek', 'king',
+    'lokanta', 'kebap', 'pide', 'döner', 'köfte',
+    'ocakbaşı', 'çorbacı', 'lahmacun', 'mantı',
+    'ev yemekleri', 'balık', 'meyhane'
   ];
 
   // İtalyan mutfağı için anahtar kelimeler
@@ -66,12 +69,12 @@ const getPriceLevel = (level: string | undefined) => {
   switch (level) {
     case '0':
     case '1':
-      return 'Ekonomik';
+      return 'Uygun';
     case '2':
       return 'Orta';
     case '3':
     case '4':
-      return 'Pahalı';
+      return 'Lüks';
     default:
       return 'Orta';
   }
@@ -92,7 +95,9 @@ export const searchNearbyRestaurants = async (
           location: `${latitude},${longitude}`,
           radius,
           type: 'restaurant',
-          key: GOOGLE_PLACES_API_KEY
+          key: GOOGLE_PLACES_API_KEY,
+          language: 'tr',
+          region: 'TR'
         }
       }
     );

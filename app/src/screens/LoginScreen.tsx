@@ -18,39 +18,49 @@ import { Ionicons } from '@expo/vector-icons';
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [emailOrUsername, setEmailOrUsername] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
   const { signIn, signUp } = useAuth();
 
   const handleSubmit = async () => {
-    if (!email || !password) {
-      Alert.alert('Hata', 'Lütfen tüm alanları doldurun');
-      return;
-    }
+    if (isLogin) {
+      if (!emailOrUsername || !password) {
+        Alert.alert('Hata', 'Lütfen tüm alanları doldurun');
+        return;
+      }
+      try {
+        setLoading(true);
+        await signIn(emailOrUsername, password);
+      } catch (error: any) {
+        Alert.alert('Hata', error.message);
+      }
+    } else {
+      if (!email || !password || !username) {
+        Alert.alert('Hata', 'Lütfen tüm alanları doldurun');
+        return;
+      }
 
-    if (!isLogin && password !== confirmPassword) {
-      Alert.alert('Hata', 'Şifreler eşleşmiyor');
-      return;
-    }
+      if (password !== confirmPassword) {
+        Alert.alert('Hata', 'Şifreler eşleşmiyor');
+        return;
+      }
 
-    try {
-      setLoading(true);
-      if (isLogin) {
-        await signIn(email, password);
-      } else {
-        await signUp(email, password);
+      try {
+        setLoading(true);
+        await signUp(email, password, username);
         Alert.alert(
           'Başarılı',
           'Hesabınız oluşturuldu. Lütfen email adresinizi doğrulayın.',
           [{ text: 'Tamam', onPress: () => setIsLogin(true) }]
         );
+      } catch (error: any) {
+        Alert.alert('Hata', error.message);
       }
-    } catch (error: any) {
-      Alert.alert('Hata', error.message);
-    } finally {
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   return (
@@ -70,19 +80,47 @@ export default function LoginScreen() {
         </Text>
       </View>
 
+
       <View style={styles.formContainer}>
-        <View style={styles.inputContainer}>
-          <Ionicons name="mail-outline" size={20} color={COLORS.primary} />
-          <TextInput
-            style={styles.input}
-            placeholder="E-posta"
-            placeholderTextColor={COLORS.gray}
-            value={email}
-            onChangeText={setEmail}
-            autoCapitalize="none"
-            keyboardType="email-address"
-          />
-        </View>
+        {!isLogin && (
+          <View style={styles.inputContainer}>
+            <Ionicons name="person-outline" size={20} color={COLORS.primary} />
+            <TextInput
+              style={styles.input}
+              placeholder="Kullanıcı Adı"
+              placeholderTextColor={COLORS.gray}
+              value={username}
+              onChangeText={setUsername}
+              autoCapitalize="none"
+            />
+          </View>
+        )}
+        {!isLogin ? (
+          <View style={styles.inputContainer}>
+            <Ionicons name="mail-outline" size={20} color={COLORS.primary} />
+            <TextInput
+              style={styles.input}
+              placeholder="E-posta"
+              placeholderTextColor={COLORS.gray}
+              value={email}
+              onChangeText={setEmail}
+              autoCapitalize="none"
+              keyboardType="email-address"
+            />
+          </View>
+        ) : (
+          <View style={styles.inputContainer}>
+            <Ionicons name="person-outline" size={20} color={COLORS.primary} />
+            <TextInput
+              style={styles.input}
+              placeholder="Email veya Kullanıcı Adı"
+              placeholderTextColor={COLORS.gray}
+              value={emailOrUsername}
+              onChangeText={setEmailOrUsername}
+              autoCapitalize="none"
+            />
+          </View>
+        )}
 
         <View style={styles.inputContainer}>
           <Ionicons name="lock-closed-outline" size={20} color={COLORS.primary} />

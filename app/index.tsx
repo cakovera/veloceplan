@@ -8,6 +8,7 @@ import RestaurantListScreen from './src/screens/RestaurantListScreen';
 import RestaurantDetailScreen from './src/screens/RestaurantDetailScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import LoginScreen from './src/screens/LoginScreen';
+import EditProfileScreen from './src/screens/EditProfileScreen';
 import SplashScreen from './src/screens/SplashScreen';
 import { Restaurant } from './src/types';
 
@@ -18,6 +19,7 @@ type RootStackParamList = {
   RestaurantDetail: { restaurant: Restaurant };
   Profile: undefined;
   Login: undefined;
+  EditProfile: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -44,6 +46,7 @@ function RootNavigator() {
           <Stack.Screen name="RestaurantList" component={RestaurantListScreen} />
           <Stack.Screen name="RestaurantDetail" component={RestaurantDetailScreen} />
           <Stack.Screen name="Profile" component={ProfileScreen} />
+          <Stack.Screen name="EditProfile" component={EditProfileScreen} />
         </>
       )}
     </Stack.Navigator>
