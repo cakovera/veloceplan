@@ -23,35 +23,22 @@
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
-        "ACCESS_BACKGROUND_LOCATION",
-        "ACCESS_COARSE_LOCATION",
-        "ACCESS_FINE_LOCATION",
         "ACCESS_BACKGROUND_LOCATION"
-      ],
-      "config": {
-        "googleMaps": {
-          "apiKey": "AIzaSyBPiXfNvfFBWiJ-LDOaxIOd-Bgfg3AAUYQ"
-        }
-      }
+      ]
+    },
+    "ios": {
+      "bundleIdentifier": "com.cgurluk.veloceplan"
     },
     "extra": {
       "eas": {
         "projectId": "6a472fbd-708a-448b-8a18-68bab19633c9"
       }
     },
-    "ios": {
-      "bundleIdentifier": "com.cgurluk.veloceplan",
-      "config": {
-        "googleMapsApiKey": "AIzaSyBPiXfNvfFBWiJ-LDOaxIOd-Bgfg3AAUYQ"
-      }
-    },
-    "runtimeVersion": {
-      "policy": "nativeVersion"
-    },
+    "owner": "cgurluk",
+    "runtimeVersion": "1.0.0",
     "updates": {
       "enabled": true,
-      "checkAutomatically": "ON_LOAD",
-      "fallbackToCacheTimeout": 30000
+      "fallbackToCacheTimeout": 0
     }
   }
 }

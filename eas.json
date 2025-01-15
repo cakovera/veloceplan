@@ -7,11 +7,7 @@
       "developmentClient": true,
       "distribution": "internal",
       "android": {
-        "gradleCommand": ":app:assembleDebug",
         "buildType": "apk"
-      },
-      "ios": {
-        "buildConfiguration": "Debug"
       }
     },
     "preview": {
@@ -21,12 +17,7 @@
       }
     },
     "production": {
-      "android": {
-        "buildType": "apk"
-      }
+      "autoIncrement": true
     }
-  },
-  "submit": {
-    "production": {}
   }
 }
